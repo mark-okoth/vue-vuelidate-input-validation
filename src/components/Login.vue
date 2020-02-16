@@ -3,17 +3,17 @@
     <div class="container">
       <div class="container">
         <h3>Login</h3>
-        <form action method>
+        <form>
           <div class="input-field">
             <input type="text" id="name" required />
             <label for="name">Name</label>
           </div>
           <div class="input-field">
-            <input type="email" id="email" required />
+            <input type="text" id="email" required class="validate" />
             <label for="email">Email</label>
           </div>
           <div class="input-field">
-            <input type="submit" class="btn-small"/>
+            <input type="submit" class="btn-small" />
           </div>
         </form>
       </div>
