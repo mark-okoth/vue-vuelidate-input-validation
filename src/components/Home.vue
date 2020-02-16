@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container">we are the best</div>
+    <div class="container">This is the home page</div>
   </div>
 </template>
 
