@@ -4,7 +4,7 @@
       <div class="container">
         <div class="container">
           <h3>Register</h3>
-          <form action method>
+          <form @submit.prevent="formvalidation">
             <div class="input-field">
               <input type="text" id="name" :class="{invalid: $v.name.error}" @input="$v.name.$touch()" required v-model="name" />
               <label for="name">Name</label>
