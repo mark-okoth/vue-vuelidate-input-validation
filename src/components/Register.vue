@@ -6,8 +6,9 @@
           <h3>Register</h3>
           <form action method>
             <div class="input-field">
-              <input type="text" id="name" required v-model="name" />
+              <input type="text" id="name" :class="{invalid: $v.name.error}" @input="$v.name.$touch()" required v-model="name" />
               <label for="name">Name</label>
+              <p  v-if="!$v.name.required" class="red-text">Please enter your name </p>
             </div>
             <div class="input-field" >
               <input type="email" id="email" :class="{invalid: $v.email.$error}" @blur="$v.email.$touch()" v-model="email" />
@@ -18,8 +19,9 @@
             </div>
 
             <div class="input-field">
-              <input type="text" id="user" required v-model="username" />
+              <input type="text" id="user" :class="{invalid: $v.username.$error}" @blur="$v.username.$touch()" required v-model="username" />
               <label for="user">Username</label>
+              <p v-if="!$v.username.required" class="red-text">Please enter a user name</p>
             </div>
 
             <div class="input-field">
@@ -29,11 +31,11 @@
             </div>
 
             <div class="input-field">
-              <input type="password" id="password" required v-model="password" />
+              <input type="password" id="password" :class="{invalid: $v.password.$error }" @blur="$v.password.$touch()" required v-model="password" />
               <label for="password">Password</label>
             </div>
             <div class="input-field">
-              <input type="password" id="password-confirm" v-model="confirmPassword" />
+              <input type="password" id="password-confirm" :class="{invalid: $v.confirmPassword.$error}" @blur="$v.confirmPassword.$touch()" v-model="confirmPassword" />
               <label for="password-confirm">Confirm Password</label>
             </div>
             <button class="waves-effect btn-small blue" type="submit">Submit</button>
@@ -45,7 +47,7 @@
 </template>
 
 <script>
-import { required, email, numeric, minValue } from "vuelidate/lib/validators";
+import { required, email, numeric, minValue, minLength, sameAs} from "vuelidate/lib/validators";
 export default {
   name: "Register",
   data() {
@@ -59,14 +61,28 @@ export default {
     };
   },
   validations: {
+    name:{
+     required
+    },
     email: {
       required,
       email
+    },
+
+    username:{
+     required
     },
     age:{
       required,
       numeric,
       minVal: minValue(18)
+    },
+    password:{
+      required,
+      minLen:minLength(6)
+    },
+    confirmPassword:{
+     sameAs:sameAs('password')
     }
   }
 };
