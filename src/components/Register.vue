@@ -9,11 +9,12 @@
               <input type="text" id="name" required v-model="name" />
               <label for="name">Name</label>
             </div>
-            <div class="input-field" :class="{invalid: $v.email.$error}">
-              <input type="email" id="email" @blur="$v.email.$touch()" v-model="email" />
+            <div class="input-field" >
+              <input type="email" id="email" :class="{invalid: $v.email.$error}" @blur="$v.email.$touch()" v-model="email" />
               <label for="email">Email</label>
-              <p v-if="!$v.email.email"> please provide a valid Email</p>
-              <p v-if="!$v.email.required">This field must not be empty</p>
+              <p class="red-text" v-if="!$v.email.email">Please provide a valid Email</p>
+              <p class="red-text" v-if="!$v.email.required">This field must not be empty</p>
+
             </div>
 
             <div class="input-field">
@@ -22,8 +23,9 @@
             </div>
 
             <div class="input-field">
-              <input type="number" required id="age" v-model.number="age" />
+              <input type="number" required id="age" :class="{invalid: $v.age.$error}"  @blur="$v.age.$touch()" v-model.number="age" />
               <label for="age">Age</label>
+              <p class="red-text" v-if="!$v.age.minVal"> Your age has to be at least {{ $v.age.$params.minVal.min}} years old </p>
             </div>
 
             <div class="input-field">
@@ -43,7 +45,7 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
+import { required, email, numeric, minValue } from "vuelidate/lib/validators";
 export default {
   name: "Register",
   data() {
@@ -60,6 +62,11 @@ export default {
     email: {
       required,
       email
+    },
+    age:{
+      required,
+      numeric,
+      minVal: minValue(18)
     }
   }
 };
@@ -73,6 +80,7 @@ export default {
 
 .input-field.invalid {
   border: 1px solid red;
+  border-top: red;
   background-color: #ffc9aa;
 }
 </style>
