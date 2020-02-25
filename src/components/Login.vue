@@ -40,7 +40,8 @@ export default {
       email
     },
     password:{
-     minLen: minLength(6)
+     minLen: minLength(6),
+     required
     }
   }
 };
