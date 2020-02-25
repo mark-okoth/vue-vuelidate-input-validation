@@ -55,7 +55,7 @@ export default {
       name: "",
       email: "",
       age: null,
-      username: "",
+      username: " ",
       password: "",
       confirmPassword: ""
     };
@@ -93,7 +93,6 @@ export default {
 .input-field.invalid label {
   color: red;
 }
-
 .input-field.invalid {
   border: 1px solid red;
   border-top: red;
